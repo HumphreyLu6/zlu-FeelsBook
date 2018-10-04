@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,8 +31,12 @@ public class HistoryActivity extends AppCompatActivity {
     private String feelNumber;
     private static final String FILENAME = "file.sav";
     private ListView historyList;
-    private ArrayList<Feel> feels = new ArrayList<Feel>();
+    private EditText editPastFeel;
+    public ArrayList<Feel> feels = new ArrayList<Feel>();
     private ArrayAdapter<Feel> adapter;
+    private Integer clickPosition = -1;
+    //public static final String EXTRA_MESSAGE ="cs.ualberta.ca.zlu_feelsbook.FEELINDEX";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,9 @@ public class HistoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         feelNumber = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         Button addButton = (Button) findViewById(R.id.addButton);
+        Button editButton = (Button) findViewById(R.id.editButton);
         commentText = (EditText) findViewById(R.id.commentText);
+        editPastFeel= (EditText) findViewById(R.id.editFeel);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             //@Override
@@ -53,6 +61,18 @@ public class HistoryActivity extends AppCompatActivity {
                saveInFile();
             }
         });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                String commentEditing = editPastFeel.getText().toString();
+                feels.get(clickPosition).modifyFeel(commentEditing);
+                String test = feels.get(0).message;
+                adapter.notifyDataSetChanged();
+                saveInFile();
+            }
+        });
+
     }
 
     @Override
@@ -63,6 +83,19 @@ public class HistoryActivity extends AppCompatActivity {
         loadFromFile();//
         adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
         historyList.setAdapter(adapter);
+        historyList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                //Toast.makeText(HistoryActivity.this, "You clicked on : " + position, Toast.LENGTH_SHORT).show();
+                clickPosition = position;
+                edit();
+            }
+        });
+    }
+
+    public void edit(){
+        String tempFeel=feels.get(clickPosition).toString();
+        editPastFeel.setText(tempFeel);
     }
 
     private void loadFromFile() {

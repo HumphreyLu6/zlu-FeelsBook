@@ -1,6 +1,9 @@
 package cs.ualberta.ca.zlu_feelsbook;
 
+import java.text.ParseException;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public abstract class Feel {
     protected String message;
@@ -32,6 +35,20 @@ public abstract class Feel {
             this.feel=null;
         }
         //System.out.println(feelNumber);
+    }
+
+    public void modifyFeel(String text){
+        String[] splitted = text.split("|");
+        this.feel = splitted[1];
+        this.message = splitted[2];
+        SimpleDateFormat sdf= new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy ");
+        try {
+            this.date = sdf.parse(splitted[0]);
+        }
+        catch (ParseException e){
+            e.printStackTrace();
+        }
+        toString();
     }
 
     public String toString(){
