@@ -5,45 +5,14 @@
     android:id="@+id/oldFeels"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/add"
-        android:layout_width="356dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:lineSpacingExtra="14sp"
-        android:onClick="addFeels"
-        android:text="@string/button_add"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comment" />
-
-    <EditText
-        android:id="@+id/comment"
-        android:layout_width="349dp"
-        android:layout_height="113dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="@string/comment"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="347dp" />
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
         android:id="@+id/love_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="97dp"
+        android:layout_height="60dp"
+        android:onClick="lovePressed"
         android:text="love"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/suprise_button"
@@ -54,8 +23,9 @@
 
     <Button
         android:id="@+id/joy_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="joyPressed"
         android:text="joy"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/anger_button"
@@ -66,9 +36,10 @@
 
     <Button
         android:id="@+id/suprise_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="suprise"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:onClick="surprisePressed"
+        android:text="surprise"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/sadness_button"
         app:layout_constraintEnd_toStartOf="@+id/anger_button"
@@ -78,8 +49,9 @@
 
     <Button
         android:id="@+id/anger_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="angerPressed"
         android:text="anger"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/fear_button"
@@ -90,11 +62,12 @@
 
     <Button
         android:id="@+id/sadness_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="177dp"
+        android:layout_height="60dp"
+        android:onClick="sadnessPressed"
         android:text="sadness"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/comment"
+        app:layout_constraintBottom_toTopOf="@+id/history_button"
         app:layout_constraintEnd_toStartOf="@+id/fear_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,11 +75,12 @@
 
     <Button
         android:id="@+id/fear_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="fearPressed"
         android:text="fear"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/comment"
+        app:layout_constraintBottom_toTopOf="@+id/counts_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sadness_button"
@@ -116,22 +90,36 @@
         android:id="@+id/history_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="208dp"
         android:text="History"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/counts_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="539dp" />
+        app:layout_constraintTop_toBottomOf="@+id/sadness_button" />
 
     <Button
         android:id="@+id/counts_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="95dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="207dp"
         android:text="Counts"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/history_button"
-        tools:layout_editor_absoluteY="539dp" />
+        app:layout_constraintTop_toBottomOf="@+id/fear_button" />
 
 </android.support.constraint.ConstraintLayout>
