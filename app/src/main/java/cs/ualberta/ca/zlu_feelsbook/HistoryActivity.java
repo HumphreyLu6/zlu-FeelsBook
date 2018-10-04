@@ -51,12 +51,21 @@ public class HistoryActivity extends AppCompatActivity {
         commentText = (EditText) findViewById(R.id.commentText);
         editPastFeel= (EditText) findViewById(R.id.editFeel);
 
+        loadFromFile();//
+        adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
+        historyList.setAdapter(adapter);
+        ImportantFeel newFeel = new ImportantFeel("",feelNumber);
+        feels.add(0,newFeel);
+        adapter.notifyDataSetChanged();
+        saveInFile();
+
         addButton.setOnClickListener(new View.OnClickListener() {
             //@Override
             public void onClick(View v) {
                String comment = commentText.getText().toString();
-               ImportantFeel newFeel = new ImportantFeel(comment,feelNumber);
-               feels.add(newFeel);
+               feels.get(0).modifyFeel(feels.get(0).toString()+comment);
+               //ImportantFeel newFeel = new ImportantFeel(comment,feelNumber);
+               //feels.add(0,newFeel);
                adapter.notifyDataSetChanged();
                saveInFile();
             }
@@ -80,9 +89,9 @@ public class HistoryActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onStart();
 
-        loadFromFile();//
-        adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
-        historyList.setAdapter(adapter);
+//        loadFromFile();//
+//        adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
+//        historyList.setAdapter(adapter);
         historyList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

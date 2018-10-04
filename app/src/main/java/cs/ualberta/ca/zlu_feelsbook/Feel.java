@@ -4,13 +4,20 @@ import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public abstract class Feel {
     protected String message;
     protected Date date;
     protected String feel;
     public Feel(String message, String feelNumber){
-        this.message = message;
+        if (message.equals("")){
+            this.message = "";
+        }
+        else{
+            this.message = message;
+        }
+
         this.date = new Date();
 
         if (feelNumber.equals("1")){
@@ -38,12 +45,14 @@ public abstract class Feel {
     }
 
     public void modifyFeel(String text){
-        String[] splitted = text.split("|");
-        this.feel = splitted[1];
-        this.message = splitted[2];
-        SimpleDateFormat sdf= new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy ");
+        String[] splited = text.split(" \\| ");
+        this.feel = splited[1];
+        this.message = splited[2];
+        SimpleDateFormat sdf= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        //sdf.setTimeZone(TimeZone.getTimeZone("MDT"));
         try {
-            this.date = sdf.parse(splitted[0]);
+            String tempDateString = splited[0];
+            this.date = sdf.parse(tempDateString);
         }
         catch (ParseException e){
             e.printStackTrace();
