@@ -1,4 +1,4 @@
-#Projrct title: zlu-FeelsBook
+#Project title: zlu-FeelsBook
 
 #Version: 1.0
 
