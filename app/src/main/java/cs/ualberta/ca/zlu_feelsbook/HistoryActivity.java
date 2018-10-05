@@ -1,3 +1,11 @@
+/*
+ *Class Name: HistoryActivity
+ *
+ * Author: Zhongaho Lu
+ *
+ * Version 1.0
+ *
+ */
 package cs.ualberta.ca.zlu_feelsbook;
 
 import android.content.Intent;
@@ -26,6 +34,7 @@ import java.util.Collections;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/*This is the class of history activity, where user can browse, edit and delete history  feel records and see count info.*/
 public class HistoryActivity extends AppCompatActivity {
 
     private EditText commentText;
@@ -38,7 +47,9 @@ public class HistoryActivity extends AppCompatActivity {
     private ArrayAdapter<Feel> adapter;
     private int clickPosition = -1;
 
-
+    /*
+    Automatic generated method
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +65,12 @@ public class HistoryActivity extends AppCompatActivity {
         commentText = (EditText) findViewById(R.id.commentText);
         editPastFeel= (EditText) findViewById(R.id.editFeel);
 
+        /*
+        Loading records from saved file and display them and may add a feel which was pressed in the first activity.
+         */
         loadFromFile();//
         adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
         historyList.setAdapter(adapter);
-
         if (!feelNumber.equals("7")){
             ImportantFeel newFeel = new ImportantFeel("",feelNumber);
             feels.add(0,newFeel);
@@ -67,6 +80,9 @@ public class HistoryActivity extends AppCompatActivity {
             saveInFile();
         }
 
+        /*
+        Respond when user press add button to put comment behind the feel records just added and save to file.
+         */
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +96,9 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Edit the feel in the edit TextView and save to file.
+         */
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +112,9 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Delete the feel that was picked by user and save the change to file.
+         */
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +128,9 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    Automatic generated method
+    */
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -120,11 +145,17 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    Called when the one record on list_item was pressed and set it on the edit EditText to wait for editing.
+     */
     public void edit(){
         String tempFeel=feels.get(clickPosition).toString();
         editPastFeel.setText(tempFeel);
     }
 
+    /*
+    Called when count Button was pressed and count the number of each feel by going through feels list in records.
+     */
     public void count(View view) {
         int countList[] = {0,0,0,0,0,0};
         for(int x=0; x<feels.size();x++){
@@ -160,6 +191,9 @@ public class HistoryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*
+    Load saved feel record from saved file.
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -177,6 +211,9 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    save the feels record list to file.
+     */
     private void saveInFile(){
         try {
             //Log.d("shaiful","I am inside savefile");//logcat consol

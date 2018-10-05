@@ -1,3 +1,11 @@
+/*
+ *Class Name: Feel
+ *
+ * Author: Zhongaho Lu
+ *
+ * Version 1.0
+ *
+ */
 package cs.ualberta.ca.zlu_feelsbook;
 
 import java.text.DateFormat;
@@ -5,11 +13,15 @@ import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/*Abstract class Feel*/
 public abstract class Feel implements Comparable<Feel>{
     protected String message;
     protected Date date;
     protected String feel;
 
+    /*
+    Checking the parameters and set attributes for instances.
+     */
     public Feel(String message, String feelNumber){
         if (message.equals("")){
             this.message = "";
@@ -44,6 +56,9 @@ public abstract class Feel implements Comparable<Feel>{
         //System.out.println(feelNumber);
     }
 
+    /*
+    Modify the attributes when edit button is pressed.
+     */
     public void modifyFeel(String text){
         String[] splited = text.split(" \\| ");
         this.feel = splited[1];
@@ -65,12 +80,18 @@ public abstract class Feel implements Comparable<Feel>{
         toString();
     }
 
+    /*
+    return all the attributes of intance in the format of string.
+     */
     public String toString(){
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); // Quoted "Z" to indicate UTC, no timezone offset
         String iso = df.format(this.date);
         return iso+" | "+this.feel + " | "+ this.message;
     }
 
+    /*
+    Compare different instances by the attribute date, needed when feels record list has any changes.
+     */
     @Override
     public int compareTo(Feel f){
         if (date.compareTo(f.date)>0 ) {

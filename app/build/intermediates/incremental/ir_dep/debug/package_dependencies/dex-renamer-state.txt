@@ -1,4 +1,4 @@
-#Thu Oct 04 20:31:04 MDT 2018
-base.0=/Users/humphrey/Desktop/Cmput301/projects/zluFeelsBook/app/build/intermediates/transforms/dexMerger/debug/10
+#Fri Oct 05 15:07:31 MDT 2018
+base.0=/Users/humphrey/Desktop/Cmput301/projects/zluFeelsBook/app/build/intermediates/transforms/dexMerger/debug/27
 path.0=classes.dex
 renamed.0=classes.dex
