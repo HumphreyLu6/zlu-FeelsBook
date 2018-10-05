@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,9 +58,10 @@ public class HistoryActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
         historyList.setAdapter(adapter);
 
-        if (!feelNumber.equals("-1")){
+        if (!feelNumber.equals("7")){
             ImportantFeel newFeel = new ImportantFeel("",feelNumber);
             feels.add(0,newFeel);
+            Collections.sort(feels);
             Toast.makeText(HistoryActivity.this, "You've added a feel !", Toast.LENGTH_SHORT).show();
             adapter.notifyDataSetChanged();
             saveInFile();
@@ -84,7 +86,7 @@ public class HistoryActivity extends AppCompatActivity {
                 String commentEditing = editPastFeel.getText().toString();
                 editPastFeel.getText().clear();
                 feels.get(clickPosition).modifyFeel(commentEditing);
-                String test = feels.get(0).message;
+                Collections.sort(feels);
                 Toast.makeText(HistoryActivity.this, "You've edited a feel !", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
                 saveInFile();
@@ -96,6 +98,7 @@ public class HistoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 editPastFeel.getText().clear();
                 feels.remove(clickPosition);
+                //feels.clear();
                 adapter.notifyDataSetChanged();
                 saveInFile();
                 Toast.makeText(HistoryActivity.this, "You've deleted a feel !", Toast.LENGTH_SHORT).show();
@@ -108,13 +111,9 @@ public class HistoryActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onStart();
 
-//        loadFromFile();//
-//        adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
-//        historyList.setAdapter(adapter);
         historyList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                //Toast.makeText(HistoryActivity.this, "You clicked on : " + position, Toast.LENGTH_SHORT).show();
                 clickPosition = position;
                 edit();
             }

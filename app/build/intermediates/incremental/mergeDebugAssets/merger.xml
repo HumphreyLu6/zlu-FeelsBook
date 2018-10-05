@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/humphrey/Desktop/Cmput301/projects/zluFeelsBook/app/src/main/assets"/><source path="/Users/humphrey/Desktop/Cmput301/projects/zluFeelsBook/app/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/humphrey/Desktop/Cmput301/projects/zluFeelsBook/app/src/debug/assets"/></dataSet></merger>
