@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "cs.ualberta.ca.zlu_feelsbook.FEELNUMBER";
+    private static final String FILENAME_1 = "feelCount.sav";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,4 +49,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void checkHistory(View view){
+        Intent intent=new Intent(this, HistoryActivity.class);
+        intent.putExtra(EXTRA_MESSAGE,"6");
+        startActivity(intent);
+    }
 }

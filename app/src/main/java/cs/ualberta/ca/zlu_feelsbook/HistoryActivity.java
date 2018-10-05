@@ -29,13 +29,13 @@ public class HistoryActivity extends AppCompatActivity {
 
     private EditText commentText;
     private String feelNumber;
+    public static final String EXTRA_MESSAGE_1 = "cs.ualberta.ca.zlu_feelsbook.COUNTSTRING";
     private static final String FILENAME = "file.sav";
     private ListView historyList;
     private EditText editPastFeel;
     public ArrayList<Feel> feels = new ArrayList<Feel>();
     private ArrayAdapter<Feel> adapter;
-    private Integer clickPosition = -1;
-    //public static final String EXTRA_MESSAGE ="cs.ualberta.ca.zlu_feelsbook.FEELINDEX";
+    private int clickPosition = -1;
 
 
     @Override
@@ -48,40 +48,59 @@ public class HistoryActivity extends AppCompatActivity {
         feelNumber = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         Button addButton = (Button) findViewById(R.id.addButton);
         Button editButton = (Button) findViewById(R.id.editButton);
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        Button countButton = (Button) findViewById(R.id.countButton);
         commentText = (EditText) findViewById(R.id.commentText);
         editPastFeel= (EditText) findViewById(R.id.editFeel);
 
         loadFromFile();//
         adapter = new ArrayAdapter<Feel>(this, R.layout.list_item, feels);
         historyList.setAdapter(adapter);
-        ImportantFeel newFeel = new ImportantFeel("",feelNumber);
-        feels.add(0,newFeel);
-        adapter.notifyDataSetChanged();
-        saveInFile();
+
+        if (!feelNumber.equals("-1")){
+            ImportantFeel newFeel = new ImportantFeel("",feelNumber);
+            feels.add(0,newFeel);
+            Toast.makeText(HistoryActivity.this, "You've added a feel !", Toast.LENGTH_SHORT).show();
+            adapter.notifyDataSetChanged();
+            saveInFile();
+        }
 
         addButton.setOnClickListener(new View.OnClickListener() {
-            //@Override
+            @Override
             public void onClick(View v) {
                String comment = commentText.getText().toString();
-               feels.get(0).modifyFeel(feels.get(0).toString()+comment);
-               //ImportantFeel newFeel = new ImportantFeel(comment,feelNumber);
-               //feels.add(0,newFeel);
-               adapter.notifyDataSetChanged();
-               saveInFile();
+               if (!comment.equals("")){
+                   commentText.getText().clear();
+                   feels.get(0).modifyFeel(feels.get(0).toString()+comment);
+                   adapter.notifyDataSetChanged();
+                   saveInFile();
+               }
             }
         });
 
         editButton.setOnClickListener(new View.OnClickListener() {
-            //@Override
+            @Override
             public void onClick(View v) {
                 String commentEditing = editPastFeel.getText().toString();
+                editPastFeel.getText().clear();
                 feels.get(clickPosition).modifyFeel(commentEditing);
                 String test = feels.get(0).message;
+                Toast.makeText(HistoryActivity.this, "You've edited a feel !", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
                 saveInFile();
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPastFeel.getText().clear();
+                feels.remove(clickPosition);
+                adapter.notifyDataSetChanged();
+                saveInFile();
+                Toast.makeText(HistoryActivity.this, "You've deleted a feel !", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -105,6 +124,41 @@ public class HistoryActivity extends AppCompatActivity {
     public void edit(){
         String tempFeel=feels.get(clickPosition).toString();
         editPastFeel.setText(tempFeel);
+    }
+
+    public void count(View view) {
+        int countList[] = {0,0,0,0,0,0};
+        for(int x=0; x<feels.size();x++){
+            String temp= feels.get(x).toString().split(" \\| ")[1];
+            if (temp.equals("Love")){
+                countList[0]++;
+            }
+            else if (temp.equals("Joy")){
+                countList[1]++;
+            }
+            else if (temp.equals("Surprise")){
+                countList[2]++;
+            }
+            else if (temp.equals("Anger")){
+                countList[3]++;
+            }
+            else if (temp.equals("Sadness")){
+                countList[4]++;
+            }
+            else if (temp.equals("Fear")){
+                countList[5]++;
+            }
+        }
+        String countString = "Love: " + String.valueOf(countList[0])+"\n"
+                +"Joy: " + String.valueOf(countList[1])+"\n"
+                +"Surprise: " + String.valueOf(countList[2])+"\n"
+                +"Anger: " + String.valueOf(countList[3])+"\n"
+                +"Sadness: " + String.valueOf(countList[4])+"\n"
+                +"Fear: " + String.valueOf(countList[5]);
+
+        Intent intent=new Intent(this, CountActivity.class);
+        intent.putExtra(EXTRA_MESSAGE_1,countString);
+        startActivity(intent);
     }
 
     private void loadFromFile() {

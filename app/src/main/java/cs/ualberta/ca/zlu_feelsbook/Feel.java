@@ -10,6 +10,7 @@ public abstract class Feel {
     protected String message;
     protected Date date;
     protected String feel;
+
     public Feel(String message, String feelNumber){
         if (message.equals("")){
             this.message = "";

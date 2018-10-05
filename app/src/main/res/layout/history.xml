@@ -14,7 +14,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +29,7 @@
         android:ems="10"
         android:hint="@string/comment"
         android:inputType="textPersonName"
+        android:maxLength="100"
         app:layout_constraintEnd_toStartOf="@+id/addButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,24 +59,59 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/historyList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addButton" />
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintVertical_bias="0.231" />
 
     <Button
         android:id="@+id/editButton"
         android:layout_width="88dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginLeft="161dp"
-        android:layout_marginRight="162dp"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
         android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/historyList"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintHorizontal_bias="0.145"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyList" />
+        app:layout_constraintTop_toBottomOf="@+id/editFeel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginRight="164dp"
+        android:layout_marginTop="22dp"
+        android:text="Delete"
+        app:layout_constraintBottom_toTopOf="@+id/historyList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFeel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/countButton"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="22dp"
+        android:onClick="count"
+        android:text="Count"
+        app:layout_constraintBottom_toTopOf="@+id/historyList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/deleteButton"
+        app:layout_constraintTop_toBottomOf="@+id/editFeel"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
